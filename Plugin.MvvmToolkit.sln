@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33213.308
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Plugin.MvvmToolkit", "Plugin.MvvmToolkit\Plugin.MvvmToolkit.csproj", "{0B1D01AD-E829-4E3F-890D-AEC53446F747}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Plugin.MvvmToolkit.Maui", "Plugin.MvvmToolkit.Maui\Plugin.MvvmToolkit.Maui.csproj", "{F890C184-7263-465E-94AC-89EDF7F5D861}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0B1D01AD-E829-4E3F-890D-AEC53446F747}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0B1D01AD-E829-4E3F-890D-AEC53446F747}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0B1D01AD-E829-4E3F-890D-AEC53446F747}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0B1D01AD-E829-4E3F-890D-AEC53446F747}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F890C184-7263-465E-94AC-89EDF7F5D861}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F890C184-7263-465E-94AC-89EDF7F5D861}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F890C184-7263-465E-94AC-89EDF7F5D861}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F890C184-7263-465E-94AC-89EDF7F5D861}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C82B6C8C-308C-4A6C-8ED4-2EDD5BF5D085}
+	EndGlobalSection
+EndGlobal
