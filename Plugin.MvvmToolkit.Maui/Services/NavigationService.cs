@@ -12,7 +12,8 @@ internal class NavigationService : INavigationService, IDisposable
 
     public void AddRoute(Type viewModelType, string viewRoute)
     {
-        _viewRoutes.TryAdd(viewModelType, viewRoute);
+        if (!_viewRoutes.TryAdd(viewModelType, viewRoute))
+            throw new DuplicateViewRouteException($"View model type '{viewModelType.Name}' is already mapped to a view route.");
     }
 
     public async Task NavigateToAsync(Type viewModelType)
