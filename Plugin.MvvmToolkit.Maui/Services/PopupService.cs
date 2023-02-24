@@ -1,6 +1,6 @@
 ﻿namespace Plugin.MvvmToolkit.Maui.Services;
 
-internal class PopupService : IPopupService
+internal sealed class PopupService : IPopupService
 {
     public async Task DisplayPopupAsync(string title, string message, string cancel)
     {

@@ -1,6 +1,6 @@
 ﻿namespace Plugin.MvvmToolkit.Maui.Services;
 
-internal class NavigationService : INavigationService, IDisposable
+internal sealed class NavigationService : INavigationService, IDisposable
 {
     private readonly Shell _shell;
     private readonly ConcurrentDictionary<Type, string> _viewRoutes = new();

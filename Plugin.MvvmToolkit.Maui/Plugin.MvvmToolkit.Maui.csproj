@@ -3,12 +3,41 @@
 		<TargetFramework>net7.0</TargetFramework>
 		<Nullable>enable</Nullable>
 		<LangVersion>latest</LangVersion>
-		<SingleProject>true</SingleProject>
 		<ImplicitUsings>enable</ImplicitUsings>
+		<NeutralLanguage>en</NeutralLanguage>
+		<Version>1.0.0</Version>
+		<AssemblyVersion>1.0.0</AssemblyVersion>
+		<AssemblyFileVersion>1.0.0</AssemblyFileVersion>
+		<PackageId>Plugin.MvvmToolkit.Maui</PackageId>
+		<AssemblyName>Plugin.MvvmToolkit.Maui</AssemblyName>
 		<RootNamespace>Plugin.MvvmToolkit.Maui</RootNamespace>
+		<Owners>VincentUhlmann</Owners>
+		<Authors>Vincent Uhlmann</Authors>
+		<Product>$(AssemblyName) ($(TargetFramework))</Product>
+		<Title>Plugin.MvvmToolkit.Maui provides an implementation of the Plugin.MvvmToolkit package for building .NET MAUI applications using the MVVM pattern.</Title>
+		<Summary>Plugin.MvvmToolkit.Maui provides an implementation of the Plugin.MvvmToolkit package for building .NET MAUI applications using the MVVM pattern.</Summary>
+		<Description>Plugin.MvvmToolkit.Maui provides an implementation of the Plugin.MvvmToolkit package for building .NET MAUI applications using the MVVM pattern.</Description>
+		<Copyright>© 2023 Vincent Uhlmann. - All rights reserved.</Copyright>
+		<PackageTags>.net, dotnet, mvvm, mvvm-pattern, model-view-viewmodel, plugin</PackageTags>
+		<RepositoryUrl>https://github.com/VincentUhlmann/Plugin.MvvmToolkit</RepositoryUrl>
+		<PackageProjectUrl>https://github.com/VincentUhlmann/Plugin.MvvmToolkit</PackageProjectUrl>
+		<PackageReleaseNotes>https://github.com/VincentUhlmann/Plugin.MvvmToolkit</PackageReleaseNotes>
+		<DefineConstants>$(DefineConstants);</DefineConstants>
+		<RepositoryType>git</RepositoryType>
+		<PackOnBuild>true</PackOnBuild>
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<PackageLicenseFile>LICENSE.md</PackageLicenseFile>
+		<PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
 		<UseMaui>true</UseMaui>
+		<SingleProject>true</SingleProject>
 	</PropertyGroup>
-	
+
+	<ItemGroup>
+		<None Include="README.md" Pack="true" PackagePath=""/>
+		<None Include="..\LICENSE.md" Pack="true" PackagePath=""/>
+	</ItemGroup>
+
 	<ItemGroup>
 		<ProjectReference Include="..\Plugin.MvvmToolkit\Plugin.MvvmToolkit.csproj" />
 	</ItemGroup>

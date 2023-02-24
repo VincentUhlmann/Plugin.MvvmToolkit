@@ -3,11 +3,39 @@
 		<TargetFramework>net7.0</TargetFramework>
 		<Nullable>enable</Nullable>
 		<LangVersion>latest</LangVersion>
-		<SingleProject>true</SingleProject>
 		<ImplicitUsings>enable</ImplicitUsings>
+		<NeutralLanguage>en</NeutralLanguage>
+		<Version>1.0.0</Version>
+		<AssemblyVersion>1.0.0</AssemblyVersion>
+		<AssemblyFileVersion>1.0.0</AssemblyFileVersion>
+		<PackageId>Plugin.MvvmToolkit</PackageId>
+		<AssemblyName>Plugin.MvvmToolkit</AssemblyName>
 		<RootNamespace>Plugin.MvvmToolkit</RootNamespace>
+		<Owners>VincentUhlmann</Owners>
+		<Authors>Vincent Uhlmann</Authors>
+		<Product>$(AssemblyName) ($(TargetFramework))</Product>
+		<Title>Plugin.MvvmToolkit provides a set of useful classes and services for building modern cross-platform applications using the MVVM pattern.</Title>
+		<Summary>Plugin.MvvmToolkit provides a set of useful classes and services for building modern cross-platform applications using the MVVM pattern.</Summary>
+		<Description>Plugin.MvvmToolkit provides a set of useful classes and services for building modern cross-platform applications using the MVVM pattern.</Description>
+		<Copyright>© 2023 Vincent Uhlmann. - All rights reserved.</Copyright>
+		<PackageTags>.net, dotnet, mvvm, mvvm-pattern, model-view-viewmodel, plugin</PackageTags>
+		<RepositoryUrl>https://github.com/VincentUhlmann/Plugin.MvvmToolkit</RepositoryUrl>
+		<PackageProjectUrl>https://github.com/VincentUhlmann/Plugin.MvvmToolkit</PackageProjectUrl>
+		<PackageReleaseNotes>https://github.com/VincentUhlmann/Plugin.MvvmToolkit</PackageReleaseNotes>
+		<DefineConstants>$(DefineConstants);</DefineConstants>
+		<RepositoryType>git</RepositoryType>
+		<PackOnBuild>true</PackOnBuild>
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<PackageLicenseFile>LICENSE.md</PackageLicenseFile>
+		<PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
 	</PropertyGroup>
 
+	<ItemGroup>
+		<None Include="README.md" Pack="true" PackagePath=""/>
+		<None Include="..\LICENSE.md" Pack="true" PackagePath=""/>
+	</ItemGroup>
+	
 	<ItemGroup>
 		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.1.0" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="7.0.0" />
