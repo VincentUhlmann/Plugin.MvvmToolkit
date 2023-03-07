@@ -5,7 +5,7 @@ VisualStudioVersion = 17.4.33213.308
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Plugin.MvvmToolkit", "Plugin.MvvmToolkit\Plugin.MvvmToolkit.csproj", "{0B1D01AD-E829-4E3F-890D-AEC53446F747}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Plugin.MvvmToolkit.Maui", "Plugin.MvvmToolkit.Maui\Plugin.MvvmToolkit.Maui.csproj", "{F890C184-7263-465E-94AC-89EDF7F5D861}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Plugin.MvvmToolkit.Maui", "Plugin.MvvmToolkit.Maui\Plugin.MvvmToolkit.Maui.csproj", "{F890C184-7263-465E-94AC-89EDF7F5D861}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

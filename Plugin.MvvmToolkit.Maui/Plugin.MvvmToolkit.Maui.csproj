@@ -30,7 +30,6 @@
 		<PackageLicenseFile>LICENSE.md</PackageLicenseFile>
 		<PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
 		<UseMaui>true</UseMaui>
-		<SingleProject>true</SingleProject>
 	</PropertyGroup>
 
 	<ItemGroup>
