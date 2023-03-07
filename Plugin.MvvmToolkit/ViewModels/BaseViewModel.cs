@@ -1,13 +1,13 @@
 ﻿namespace Plugin.MvvmToolkit.ViewModels;
 
-public abstract partial class BaseViewModel<T> : ObservableObject where T : ILogger
+public abstract partial class BaseViewModel<TLogger> : ObservableObject where TLogger : ILogger
 {
-    protected T Logger { get; }
+    protected TLogger Logger { get; }
     protected INavigationService NavigationService { get; }
     protected IPopupService PopupService { get; }
     protected bool Initialized { get; set; }
 
-    protected BaseViewModel(T logger, INavigationService navigationService, IPopupService popupService)
+    protected BaseViewModel(TLogger logger, INavigationService navigationService, IPopupService popupService)
     {
         Logger = logger;
         NavigationService = navigationService;

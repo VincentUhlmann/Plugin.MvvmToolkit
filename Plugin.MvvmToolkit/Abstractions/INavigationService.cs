@@ -2,9 +2,9 @@
 
 public interface INavigationService
 {
-    void AddRoute(Type viewModelType, string viewRoute);
+    void AddRoute<TViewModel>(object route) where TViewModel : BaseViewModel<ILogger<TViewModel>>;
 
-    Task NavigateAsync(Type viewModelType, object? parameter = null);
+    Task NavigateAsync<TViewModel>(object? parameter = null) where TViewModel : BaseViewModel<ILogger<TViewModel>>;
 
-    Task GoBackAsync();
+    Task NavigateBackAsync(object? parameter = null);
 }

@@ -11,9 +11,4 @@ internal sealed class PopupService : IPopupService
     {
         return await Application.Current!.MainPage!.DisplayAlert(title, message, accept, cancel);
     }
-
-    public async Task<string> DisplayPopupAsync(string title, string[] buttons, string? cancel = null, string? destruction = null)
-    {
-        return await Application.Current!.MainPage!.DisplayActionSheet(title, cancel, destruction, buttons);
-    }
 }

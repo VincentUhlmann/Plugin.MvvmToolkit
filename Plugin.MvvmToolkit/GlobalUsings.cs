@@ -2,3 +2,4 @@
 global using CommunityToolkit.Mvvm.Input;
 global using Microsoft.Extensions.Logging;
 global using Plugin.MvvmToolkit.Abstractions;
+global using Plugin.MvvmToolkit.ViewModels;
