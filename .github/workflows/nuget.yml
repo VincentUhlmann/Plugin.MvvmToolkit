@@ -1,0 +1,19 @@
+on:
+  push:
+    tags:
+    - "v*.*.*"
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Build
+      run: dotnet build --configuration Release
+    - name: Test
+      run: dotnet test --configuration Release --no-build
+    - name: Push
+      run: dotnet nuget push "**/Release/*.nupkg" -k ${NUGET_SECRET} -s https://api.nuget.org/v3/index.json
+      env:
+        NUGET_SECRET: ${{ secrets.NUGET }}
