@@ -12,7 +12,7 @@ internal sealed class NavigationService : INavigationService
         var type = typeof(TViewModel);
 
         if (!_viewRoutes.TryAdd(type, viewRoute))
-            throw new DuplicateViewRouteException($"View model type '{type.Name}' is already mapped to a view route.");
+            throw new DuplicateRouteException($"View model type '{type.Name}' is already mapped to a view route.");
     }
 
     public async Task NavigateAsync<TViewModel>(object? parameter = null) where TViewModel : BaseViewModel<ILogger<TViewModel>>
@@ -20,7 +20,7 @@ internal sealed class NavigationService : INavigationService
         var type = typeof(TViewModel);
 
         if (!_viewRoutes.TryGetValue(type, out var viewRoute))
-            throw new ViewRouteNotFoundException($"View model type '{type.Name}' is not mapped to a view route.");
+            throw new RouteNotFoundException($"View model type '{type.Name}' is not mapped to a view route.");
 
         try {
             if (parameter is null) {

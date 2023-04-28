@@ -3,15 +3,11 @@
 public abstract partial class BaseViewModel<TLogger> : ObservableObject where TLogger : ILogger
 {
     protected TLogger Logger { get; }
-    protected INavigationService NavigationService { get; }
-    protected IPopupService PopupService { get; }
     protected bool Initialized { get; set; }
 
-    protected BaseViewModel(TLogger logger, INavigationService navigationService, IPopupService popupService)
+    protected BaseViewModel(TLogger logger)
     {
         Logger = logger;
-        NavigationService = navigationService;
-        PopupService = popupService;
     }
 
     [RelayCommand]
