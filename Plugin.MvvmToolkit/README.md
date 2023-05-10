@@ -4,9 +4,8 @@ This is a .NET library that provides a set of base classes and services to facil
 
 ## Features
 
-- Base ViewModel class
-- NavigationService to navigate between ViewModels
-- PopupService to display popup messages
+- BaseViewModel class with logging capabilities
+- INavigationService to navigate between ViewModels
 
 ## Installation
 
@@ -16,7 +15,15 @@ Install-Package Plugin.MvvmToolkit
 
 ## Usage
 
-To use the NavigationService or PopupService, simply create an instance of the service and use its methods. You can also extend the base ViewModel class to create your own implementations.
+### BaseViewModel
+
+To create a ViewModel, simply extend the BaseViewModel<TLogger> class, where TLogger is a logger instance that implements the ILogger interface.
+The BaseViewModel class provides two virtual methods, OnAppearing and OnDisappearing, that are called when the ViewModel appears or disappears on the screen, respectively.
+
+### INavigationService
+
+To use the INavigationService, create an instance of the service and use its methods to navigate between ViewModels.
+The AddRoute method is used to register a route with a ViewModel, and the NavigateAsync and NavigateBackAsync methods are used to navigate between ViewModels.
 
 ## License
 
