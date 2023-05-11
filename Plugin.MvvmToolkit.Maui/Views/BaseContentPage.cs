@@ -5,19 +5,19 @@ namespace Plugin.MvvmToolkit.Maui.Views;
 /// <summary>
 /// Base content page to be used as a starting point for pages in the application.
 /// </summary>
-/// <typeparam name="T">The type of the associated ViewModel.</typeparam>
-public abstract class BaseContentPage<T> : ContentPage where T : BaseViewModel<ILogger<T>>
+/// <typeparam name="TViewModel">The type of the associated ViewModel.</typeparam>
+public abstract class BaseContentPage<TViewModel> : ContentPage where TViewModel : BaseViewModel<ILogger<TViewModel>>
 {
     /// <summary>
     /// The ViewModel associated with this page.
     /// </summary>
-    protected T ViewModel { get; }
+    protected TViewModel ViewModel { get; }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="BaseContentPage{T}"/> class.
     /// </summary>
     /// <param name="viewModel">The ViewModel instance.</param>
-    protected BaseContentPage(T viewModel)
+    protected BaseContentPage(TViewModel viewModel)
     {
         BindingContext = ViewModel = viewModel;
         On<iOS>().SetUseSafeArea(true);
