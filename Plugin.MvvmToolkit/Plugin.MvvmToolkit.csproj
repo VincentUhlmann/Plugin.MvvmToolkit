@@ -5,20 +5,20 @@
 		<LangVersion>latest</LangVersion>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<NeutralLanguage>en</NeutralLanguage>
-		<Version>1.4.1</Version>
-		<AssemblyVersion>1.4.1</AssemblyVersion>
-		<AssemblyFileVersion>1.4.1</AssemblyFileVersion>
+		<Version>1.4.2</Version>
+		<AssemblyVersion>1.4.2</AssemblyVersion>
+		<AssemblyFileVersion>1.4.2</AssemblyFileVersion>
 		<PackageId>Plugin.MvvmToolkit</PackageId>
 		<AssemblyName>Plugin.MvvmToolkit</AssemblyName>
 		<RootNamespace>Plugin.MvvmToolkit</RootNamespace>
 		<Owners>VincentUhlmann</Owners>
 		<Authors>Vincent Uhlmann</Authors>
 		<Product>$(AssemblyName) ($(TargetFramework))</Product>
-		<Title>Plugin.MvvmToolkit provides a set of useful classes and services for building modern cross-platform applications using the MVVM pattern.</Title>
-		<Summary>Plugin.MvvmToolkit provides a set of useful classes and services for building modern cross-platform applications using the MVVM pattern.</Summary>
-		<Description>Plugin.MvvmToolkit provides a set of useful classes and services for building modern cross-platform applications using the MVVM pattern.</Description>
+		<Title>.NET library for building modern applications using the MVVM pattern.</Title>
+		<Summary>.NET library for building modern applications using the MVVM pattern.</Summary>
+		<Description>.NET library for building modern applications using the MVVM pattern.</Description>
 		<Copyright>© 2023 Vincent Uhlmann. - All rights reserved.</Copyright>
-		<PackageTags>.net, dotnet, mvvm, mvvm-pattern, model-view-viewmodel, plugin</PackageTags>
+		<PackageTags>plugin, .net, mvvm</PackageTags>
 		<RepositoryUrl>https://github.com/VincentUhlmann/Plugin.MvvmToolkit</RepositoryUrl>
 		<PackageProjectUrl>https://github.com/VincentUhlmann/Plugin.MvvmToolkit</PackageProjectUrl>
 		<PackageReleaseNotes>https://github.com/VincentUhlmann/Plugin.MvvmToolkit</PackageReleaseNotes>

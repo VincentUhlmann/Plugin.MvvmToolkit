@@ -1,7 +1,7 @@
 ﻿namespace Plugin.MvvmToolkit.Maui.Services;
 
 /// <inheritdoc />
-public sealed class NavigationService : INavigationService 
+public sealed class NavigationService : INavigationService
 {
     private readonly ConcurrentDictionary<Type, string> _viewRoutes = new();
 
