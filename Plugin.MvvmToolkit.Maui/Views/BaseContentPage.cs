@@ -20,7 +20,15 @@ public abstract class BaseContentPage<TViewModel> : ContentPage where TViewModel
     protected BaseContentPage(TViewModel viewModel)
     {
         BindingContext = ViewModel = viewModel;
-        On<iOS>().SetUseSafeArea(true);
+    }
+
+    /// <summary>
+    /// Sets whether to use the safe area on iOS devices.
+    /// </summary>
+    /// <param name="value">A boolean indicating whether to use the safe area.</param>
+    protected void SetUseSafeArea(bool value)
+    {
+        On<iOS>().SetUseSafeArea(value);
     }
 
     /// <summary>
