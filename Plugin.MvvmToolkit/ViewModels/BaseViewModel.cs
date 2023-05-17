@@ -4,8 +4,13 @@
 /// Represents a base class for view models that provides basic functionality for handling lifecycle events and logging.
 /// </summary>
 /// <typeparam name="TLogger">The type of logger used by the view model.</typeparam>
-public abstract partial class BaseViewModel<TLogger> : ObservableObject where TLogger : ILogger
+public abstract partial class BaseViewModel<TLogger> : ObservableObject, IDisposable where TLogger : ILogger
 {
+    /// <summary>
+    /// Indicates whether the view model has been disposed.
+    /// </summary>
+    protected bool Disposed { get; private set; }
+
     /// <summary>
     /// Gets the logger instance used by the view model.
     /// </summary>
@@ -43,5 +48,26 @@ public abstract partial class BaseViewModel<TLogger> : ObservableObject where TL
     protected virtual Task OnDisappearing()
     {
         return Task.CompletedTask;
+    }
+
+    /// <summary>
+    /// Invoked when the corresponding Page is unloaded.
+    /// </summary>
+    /// <param name="disposing"></param>
+    protected virtual void Dispose(bool disposing)
+    {
+        if (Disposed)
+            return;
+
+        Disposed = true;
+    }
+
+    /// <summary>
+    /// Invoked when the corresponding Page is unloaded.
+    /// </summary>
+    public void Dispose()
+    {
+        Dispose(true);
+        GC.SuppressFinalize(this);
     }
 }

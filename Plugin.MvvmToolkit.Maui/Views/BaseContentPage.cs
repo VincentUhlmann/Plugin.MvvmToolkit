@@ -6,8 +6,13 @@ namespace Plugin.MvvmToolkit.Maui.Views;
 /// Base content page to be used as a starting point for pages in the application.
 /// </summary>
 /// <typeparam name="TViewModel">The type of the associated ViewModel.</typeparam>
-public abstract class BaseContentPage<TViewModel> : ContentPage where TViewModel : BaseViewModel<ILogger<TViewModel>>
+public abstract class BaseContentPage<TViewModel> : ContentPage, IDisposable where TViewModel : BaseViewModel<ILogger<TViewModel>>
 {
+    /// <summary>
+    /// Indicates whether the page has been disposed.
+    /// </summary>
+    protected bool Disposed { get; private set; }
+
     /// <summary>
     /// The ViewModel associated with this page.
     /// </summary>
@@ -20,6 +25,8 @@ public abstract class BaseContentPage<TViewModel> : ContentPage where TViewModel
     protected BaseContentPage(TViewModel viewModel)
     {
         BindingContext = ViewModel = viewModel;
+
+        Unloaded += (s, e) => Dispose();
     }
 
     /// <summary>
@@ -49,5 +56,29 @@ public abstract class BaseContentPage<TViewModel> : ContentPage where TViewModel
         base.OnDisappearing();
 
         ViewModel.DisappearingCommand.Execute(this);
+    }
+
+    /// <summary>
+    /// Invoked when the Page is unloaded.
+    /// </summary>
+    /// <param name="disposing"></param>
+    protected virtual void Dispose(bool disposing)
+    {
+        if (Disposed)
+            return;
+
+        if (disposing)
+            ViewModel.Dispose();
+
+        Disposed = true;
+    }
+
+    /// <summary>
+    /// Invoked when the Page is unloaded.
+    /// </summary>
+    public void Dispose()
+    {
+        Dispose(true);
+        GC.SuppressFinalize(this);
     }
 }
