@@ -10,6 +10,8 @@ public interface INavigationService
     /// </summary>
     /// <typeparam name="TViewModel">The type of the ViewModel.</typeparam>
     /// <param name="route">The URI or route associated with the ViewModel.</param>
+    /// <exception cref="ArgumentException"></exception>
+    /// <exception cref="DuplicateRouteException"></exception>
     void AddRoute<TViewModel>(object route) where TViewModel : BaseViewModel<ILogger<TViewModel>>;
 
     /// <summary>
@@ -18,6 +20,7 @@ public interface INavigationService
     /// <typeparam name="TViewModel">The type of the ViewModel to navigate to.</typeparam>
     /// <param name="parameter">An optional parameter to pass to the ViewModel.</param>
     /// <returns>A Task that represents the asynchronous navigation operation.</returns>
+    /// <exception cref="RouteNotFoundException"></exception>
     Task NavigateAsync<TViewModel>(object? parameter = null) where TViewModel : BaseViewModel<ILogger<TViewModel>>;
 
     /// <summary>

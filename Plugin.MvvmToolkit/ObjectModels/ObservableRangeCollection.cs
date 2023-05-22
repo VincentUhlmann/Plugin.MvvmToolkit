@@ -1,4 +1,4 @@
-﻿namespace Plugin.MvvmToolkit.ObjectModel;
+﻿namespace Plugin.MvvmToolkit.ObjectModels;
 
 /// <summary>
 /// Represents a dynamic data collection that provides notifications when items get added, removed, or when the whole list is refreshed.
@@ -119,6 +119,11 @@ public sealed class ObservableRangeCollection<T> : ObservableCollection<T>
         RaiseChangeNotificationEvents(action: NotifyCollectionChangedAction.Reset);
     }
 
+    /// <summary>
+    /// Adds the items from the specified collection to the ObservableCollection(Of T) and returns whether any item was added.
+    /// </summary>
+    /// <param name="collection">The collection of items to add.</param>
+    /// <returns>True if any item was added; otherwise, false.</returns>
     private bool AddArrangeCore(IEnumerable<T> collection)
     {
         var itemAdded = false;
@@ -129,6 +134,12 @@ public sealed class ObservableRangeCollection<T> : ObservableCollection<T>
         return itemAdded;
     }
 
+    /// <summary>
+    /// Raises the necessary change notification events based on the specified action and optional parameters.
+    /// </summary>
+    /// <param name="action">The action that triggered the change.</param>
+    /// <param name="changedItems">The list of changed items. Null if not applicable.</param>
+    /// <param name="startingIndex">The starting index of the change. Default is -1.</param>
     private void RaiseChangeNotificationEvents(NotifyCollectionChangedAction action, List<T>? changedItems = null, int startingIndex = -1)
     {
         OnPropertyChanged(new PropertyChangedEventArgs(nameof(Count)));

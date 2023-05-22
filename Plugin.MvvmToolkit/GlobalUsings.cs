@@ -1,6 +1,10 @@
 ﻿global using CommunityToolkit.Mvvm.ComponentModel;
 global using CommunityToolkit.Mvvm.Input;
 global using Microsoft.Extensions.Logging;
+global using Plugin.MvvmToolkit.Abstractions;
+global using Plugin.MvvmToolkit.Collections;
+global using Plugin.MvvmToolkit.Exceptions;
+global using Plugin.MvvmToolkit.Models;
 global using Plugin.MvvmToolkit.ViewModels;
 global using System.Collections.ObjectModel;
 global using System.Collections.Specialized;
