@@ -1,4 +1,5 @@
 ﻿using Microsoft.Maui.Controls.PlatformConfiguration.iOSSpecific;
+using System.Reflection;
 
 namespace Plugin.MvvmToolkit.Maui.Views;
 
@@ -81,7 +82,15 @@ public abstract class BaseContentPage<TViewModel> : ContentPage, IView<TViewMode
         if (query is null)
             return;
 
-        foreach (var (key, value) in query)
-            typeof(TViewModel).GetProperty(key)?.SetMethod?.Invoke(ViewModel, new[] { value });
+        foreach (var property in typeof(TViewModel).GetProperties().Where(x => x.IsDefined(typeof(NavigationPropertyAttribute), true))) {
+            if (query.TryGetValue(property.Name, out var value)) {
+                property.SetMethod?.Invoke(ViewModel, new[] { value });
+            } else {
+                var defaultValue = property.GetCustomAttribute<NavigationPropertyAttribute>()?.DefaultValue;
+
+                if (defaultValue is not null)
+                    property.SetMethod?.Invoke(ViewModel, new[] { defaultValue });
+            }
+        }
     }
 }

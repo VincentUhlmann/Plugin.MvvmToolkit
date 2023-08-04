@@ -9,3 +9,7 @@ global using Plugin.MvvmToolkit.ViewModels;
 global using System.Collections.ObjectModel;
 global using System.Collections.Specialized;
 global using System.ComponentModel;
+global using CommunityToolkit.Mvvm.Messaging.Messages;
+global using CommunityToolkit.Mvvm.Messaging;
+global using Plugin.MvvmToolkit.Messages;
+global using Plugin.MvvmToolkit.Attributes;

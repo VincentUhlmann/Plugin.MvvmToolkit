@@ -32,6 +32,21 @@ public sealed class NavigationService : INavigationService
         await Navigate(viewRoute, navigationParams);
     }
 
+    public async Task<TResult> NavigateWithResultAsync<TViewModel, TResult>(Dictionary<string, object>? navigationParams = null) where TViewModel : BaseResultViewModel<ILogger<TViewModel>, TResult>
+    {
+        navigationParams ??= new Dictionary<string, object>();
+
+        var guid = Guid.NewGuid();
+
+        navigationParams.Add(nameof(BaseResultViewModel<ILogger<TViewModel>, TResult>.NavigationId), guid);
+
+        await NavigateAsync<TViewModel>(navigationParams);
+        var result = await WeakReferenceMessenger.Default.Send(new NavigationResultMessage<TResult>(), guid);
+        await NavigateBackAsync();
+
+        return result;
+    }
+
     /// <inheritdoc />
     public async Task NavigateBackAsync(Dictionary<string, object>? navigationParams = null)
     {

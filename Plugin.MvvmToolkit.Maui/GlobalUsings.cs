@@ -7,3 +7,6 @@ global using Plugin.MvvmToolkit.Maui.Services;
 global using Plugin.MvvmToolkit.Models;
 global using Plugin.MvvmToolkit.ViewModels;
 global using System.Collections.Concurrent;
+global using CommunityToolkit.Mvvm.Messaging;
+global using Plugin.MvvmToolkit.Messages;
+global using Plugin.MvvmToolkit.Attributes;
