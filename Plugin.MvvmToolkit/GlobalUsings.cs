@@ -12,3 +12,4 @@ global using Plugin.MvvmToolkit.Models;
 global using System.Collections.ObjectModel;
 global using System.Collections.Specialized;
 global using System.ComponentModel;
+global using Plugin.MvvmToolkit.ViewModels;
