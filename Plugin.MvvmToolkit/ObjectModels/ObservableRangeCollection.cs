@@ -77,7 +77,7 @@ public sealed class ObservableRangeCollection<T> : ObservableCollection<T>
         }
 
         var changedItems = new List<T>(collection);
-        for (var i = 0;i < changedItems.Count;i++) {
+        for (var i = 0; i < changedItems.Count; i++) {
             if (!Items.Remove(changedItems[i])) {
                 changedItems.RemoveAt(i); // Can't use a foreach because changedItems is intended to be (carefully) modified
                 i--;
