@@ -6,36 +6,30 @@ namespace Plugin.MvvmToolkit.Maui.Views;
 /// Base content page to be used as a starting point for pages in the application.
 /// </summary>
 /// <typeparam name="TViewModel">The type of the associated ViewModel.</typeparam>
-public abstract class BaseContentPage<TViewModel> : ContentPage, IDisposable where TViewModel : BaseViewModel<ILogger<TViewModel>>
+public abstract class BaseContentPage<TViewModel> : ContentPage, IView<TViewModel>, IDisposable, IQueryAttributable where TViewModel : BaseViewModel<ILogger<TViewModel>>
 {
+    /// <summary>
+    /// The ViewModel associated with this page.
+    /// </summary>
+    public TViewModel ViewModel { get; }
+
     /// <summary>
     /// Indicates whether the page has been disposed.
     /// </summary>
     protected bool Disposed { get; private set; }
 
     /// <summary>
-    /// The ViewModel associated with this page.
-    /// </summary>
-    protected TViewModel ViewModel { get; }
-
-    /// <summary>
-    /// Initializes a new instance of the <see cref="BaseContentPage{T}"/> class.
+    /// Initializes a new instance of the <see cref="BaseContentPage{TViewModel}"/> class.
     /// </summary>
     /// <param name="viewModel">The ViewModel instance.</param>
-    protected BaseContentPage(TViewModel viewModel)
+    /// <param name="setUseSafeArea">Indicates whether the page should use the safe area on iOS devices.</param>
+    protected BaseContentPage(TViewModel viewModel, bool setUseSafeArea = true)
     {
         BindingContext = ViewModel = viewModel;
 
-        Unloaded += (s, e) => Dispose();
-    }
+        On<iOS>().SetUseSafeArea(setUseSafeArea);
 
-    /// <summary>
-    /// Sets whether to use the safe area on iOS devices.
-    /// </summary>
-    /// <param name="value">A boolean indicating whether to use the safe area.</param>
-    protected void SetUseSafeArea(bool value)
-    {
-        On<iOS>().SetUseSafeArea(value);
+        Unloaded += (s, e) => Dispose();
     }
 
     /// <summary>
@@ -80,5 +74,14 @@ public abstract class BaseContentPage<TViewModel> : ContentPage, IDisposable whe
     {
         Dispose(true);
         GC.SuppressFinalize(this);
+    }
+
+    public void ApplyQueryAttributes(IDictionary<string, object> query)
+    {
+        if (query is null)
+            return;
+
+        foreach (var (key, value) in query)
+            typeof(TViewModel).GetProperty(key)?.SetMethod?.Invoke(ViewModel, new[] { value });
     }
 }

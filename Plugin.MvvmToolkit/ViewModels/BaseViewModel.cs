@@ -7,11 +7,6 @@
 public abstract partial class BaseViewModel<TLogger> : ObservableObject, IDisposable where TLogger : ILogger
 {
     /// <summary>
-    /// Indicates whether the view model has been disposed.
-    /// </summary>
-    protected bool Disposed { get; private set; }
-
-    /// <summary>
     /// Gets the logger instance used by the view model.
     /// </summary>
     protected TLogger Logger { get; }
@@ -20,6 +15,11 @@ public abstract partial class BaseViewModel<TLogger> : ObservableObject, IDispos
     /// Gets or sets a value indicating whether the view model has been initialized.
     /// </summary>
     protected bool Initialized { get; set; }
+
+    /// <summary>
+    /// Indicates whether the view model has been disposed.
+    /// </summary>
+    protected bool Disposed { get; private set; }
 
     /// <summary>
     /// Initializes a new instance of the BaseViewModel class with the specified logger instance.
@@ -53,6 +53,15 @@ public abstract partial class BaseViewModel<TLogger> : ObservableObject, IDispos
     /// <summary>
     /// Invoked when the corresponding Page is unloaded.
     /// </summary>
+    public void Dispose()
+    {
+        Dispose(true);
+        GC.SuppressFinalize(this);
+    }
+
+    /// <summary>
+    /// Invoked when the corresponding Page is unloaded.
+    /// </summary>
     /// <param name="disposing"></param>
     protected virtual void Dispose(bool disposing)
     {
@@ -60,14 +69,5 @@ public abstract partial class BaseViewModel<TLogger> : ObservableObject, IDispos
             return;
 
         Disposed = true;
-    }
-
-    /// <summary>
-    /// Invoked when the corresponding Page is unloaded.
-    /// </summary>
-    public void Dispose()
-    {
-        Dispose(true);
-        GC.SuppressFinalize(this);
     }
 }

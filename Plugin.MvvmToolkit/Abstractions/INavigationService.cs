@@ -12,7 +12,7 @@ public interface INavigationService
     /// <param name="route">The URI or route associated with the ViewModel.</param>
     /// <exception cref="ArgumentException"></exception>
     /// <exception cref="DuplicateRouteException"></exception>
-    void AddRoute<TViewModel>(object route) where TViewModel : BaseViewModel<ILogger<TViewModel>>;
+    void AddRoute<TView, TViewModel>(string? route = null) where TView : IView<TViewModel> where TViewModel : BaseViewModel<ILogger<TViewModel>>;
 
     /// <summary>
     /// Navigates to the View associated with the specified ViewModel.
@@ -21,12 +21,12 @@ public interface INavigationService
     /// <param name="parameter">An optional parameter to pass to the ViewModel.</param>
     /// <returns>A Task that represents the asynchronous navigation operation.</returns>
     /// <exception cref="RouteNotFoundException"></exception>
-    Task NavigateAsync<TViewModel>(object? parameter = null) where TViewModel : BaseViewModel<ILogger<TViewModel>>;
+    Task NavigateAsync<TViewModel>(Dictionary<string, object>? navigationParams = null) where TViewModel : BaseViewModel<ILogger<TViewModel>>;
 
     /// <summary>
     /// Navigates back to the previous View in the navigation stack.
     /// </summary>
     /// <param name="parameter">An optional parameter to pass back to the previous ViewModel.</param>
     /// <returns>A Task that represents the asynchronous navigation operation.</returns>
-    Task NavigateBackAsync(object? parameter = null);
+    Task NavigateBackAsync(Dictionary<string, object>? navigationParams = null);
 }
