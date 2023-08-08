@@ -1,6 +1,7 @@
 ﻿global using CommunityToolkit.Mvvm.Messaging;
 global using Microsoft.Extensions.Logging;
 global using Microsoft.Maui.Controls.PlatformConfiguration;
+global using Microsoft.Maui.Controls.PlatformConfiguration.iOSSpecific;
 global using Plugin.MvvmToolkit.Abstractions;
 global using Plugin.MvvmToolkit.Attributes;
 global using Plugin.MvvmToolkit.Collections;
@@ -10,3 +11,4 @@ global using Plugin.MvvmToolkit.Messages;
 global using Plugin.MvvmToolkit.Models;
 global using Plugin.MvvmToolkit.ViewModels;
 global using System.Collections.Concurrent;
+global using System.Reflection;

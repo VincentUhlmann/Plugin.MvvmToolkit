@@ -1,7 +1,4 @@
-﻿using Microsoft.Maui.Controls.PlatformConfiguration.iOSSpecific;
-using System.Reflection;
-
-namespace Plugin.MvvmToolkit.Maui.Views;
+﻿namespace Plugin.MvvmToolkit.Maui.Views;
 
 /// <summary>
 /// Base content page to be used as a starting point for pages in the application.
@@ -77,6 +74,10 @@ public abstract class BaseContentPage<TViewModel> : ContentPage, IView<TViewMode
         GC.SuppressFinalize(this);
     }
 
+    /// <summary>
+    /// Applies the query attributes to the ViewModel.
+    /// </summary>
+    /// <param name="query"></param>
     public void ApplyQueryAttributes(IDictionary<string, object> query)
     {
         if (query is null)

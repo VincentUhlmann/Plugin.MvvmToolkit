@@ -32,6 +32,7 @@ public sealed class NavigationService : INavigationService
         await Navigate(viewRoute, navigationParams);
     }
 
+    /// <inheritdoc />
     public async Task<TResult> NavigateWithResultAsync<TViewModel, TResult>(Dictionary<string, object>? navigationParams = null) where TViewModel : BaseResultViewModel<ILogger<TViewModel>, TResult>
     {
         navigationParams ??= new Dictionary<string, object>();
