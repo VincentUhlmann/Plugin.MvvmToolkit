@@ -83,15 +83,41 @@ public abstract class BaseContentPage<TViewModel> : ContentPage, IView<TViewMode
         if (query is null)
             return;
 
-        foreach (var property in typeof(TViewModel).GetProperties().Where(x => x.IsDefined(typeof(NavigationPropertyAttribute), true))) {
-            if (query.TryGetValue(property.Name, out var value)) {
-                property.SetMethod?.Invoke(ViewModel, new[] { value });
-            } else {
-                var defaultValue = property.GetCustomAttribute<NavigationPropertyAttribute>()?.DefaultValue;
+        foreach (var field in typeof(TViewModel).GetFields().Where(x => x.IsDefined(typeof(NavigationPropertyAttribute), true))) {
+            var propertyName = GetGeneratedPropertyName(field.Name);
+            var property = typeof(TViewModel).GetProperty(propertyName);
 
-                if (defaultValue is not null)
-                    property.SetMethod?.Invoke(ViewModel, new[] { defaultValue });
-            }
+            if (property is null)
+                throw new NavigationException($"Property '{propertyName}' not found in '{typeof(TViewModel)}'");
+
+            SetPropertyValue(property, query);
         }
+
+        foreach (var property in typeof(TViewModel).GetProperties().Where(x => x.IsDefined(typeof(NavigationPropertyAttribute), true))) {
+            SetPropertyValue(property, query);
+        }
+    }
+
+    private void SetPropertyValue(PropertyInfo property, IDictionary<string, object> query)
+    {
+        if (query.TryGetValue(property.Name, out var value)) {
+            property.SetMethod?.Invoke(ViewModel, new[] { value });
+        } else {
+            var defaultValue = property.GetCustomAttribute<NavigationPropertyAttribute>()?.DefaultValue;
+
+            if (defaultValue is not null)
+                property.SetMethod?.Invoke(ViewModel, new[] { defaultValue });
+        }
+    }
+
+    private static string GetGeneratedPropertyName(string propertyName)
+    {
+        if (propertyName.StartsWith("m_")) {
+            propertyName = propertyName[2..];
+        } else if (propertyName.StartsWith("_")) {
+            propertyName = propertyName.TrimStart('_');
+        }
+
+        return $"{char.ToUpper(propertyName[0], CultureInfo.InvariantCulture)}{propertyName[1..]}";
     }
 }

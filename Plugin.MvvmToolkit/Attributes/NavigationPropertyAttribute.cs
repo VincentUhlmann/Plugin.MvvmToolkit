@@ -3,7 +3,7 @@
 /// <summary>
 /// Specifies that a property is a navigation property.
 /// </summary>
-[AttributeUsage(AttributeTargets.Property)]
+[AttributeUsage(AttributeTargets.Field | AttributeTargets.Property)]
 public sealed class NavigationPropertyAttribute : Attribute
 {
     /// <summary>
