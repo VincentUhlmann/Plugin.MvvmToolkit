@@ -85,10 +85,7 @@ public abstract class BaseContentPage<TViewModel> : ContentPage, IView<TViewMode
 
         foreach (var field in typeof(TViewModel).GetFields().Where(x => x.IsDefined(typeof(NavigationPropertyAttribute), true))) {
             var propertyName = GetGeneratedPropertyName(field.Name);
-            var property = typeof(TViewModel).GetProperty(propertyName);
-
-            if (property is null)
-                throw new NavigationException($"Property '{propertyName}' not found in '{typeof(TViewModel)}'");
+            var property = typeof(TViewModel).GetProperty(propertyName) ?? throw new NavigationException($"Property '{propertyName}' not found in '{typeof(TViewModel)}'");
 
             SetPropertyValue(property, query);
         }

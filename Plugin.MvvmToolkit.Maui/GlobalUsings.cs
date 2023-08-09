@@ -11,5 +11,5 @@ global using Plugin.MvvmToolkit.Messages;
 global using Plugin.MvvmToolkit.Models;
 global using Plugin.MvvmToolkit.ViewModels;
 global using System.Collections.Concurrent;
-global using System.Reflection;
 global using System.Globalization;
+global using System.Reflection;
