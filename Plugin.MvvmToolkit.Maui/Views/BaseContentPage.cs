@@ -83,25 +83,25 @@ public abstract class BaseContentPage<TViewModel> : ContentPage, IView<TViewMode
         if (query is null)
             return;
 
-        foreach (var field in typeof(TViewModel).GetFields(BindingFlags.NonPublic).Where(x => x.IsDefined(typeof(NavigationPropertyAttribute), true))) {
+        foreach (var field in typeof(TViewModel).GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance).Where(x => x.IsDefined(typeof(NavigationPropertyAttribute), true))) {
             var propertyName = GetGeneratedPropertyName(field.Name);
             var property = typeof(TViewModel).GetProperty(propertyName) ?? throw new NavigationException($"Property '{propertyName}' not found in '{typeof(TViewModel)}'");
 
-            SetPropertyValue(property, query);
+            var defaultValue = field.GetCustomAttribute<NavigationPropertyAttribute>()?.DefaultValue;
+            SetPropertyValue(property, query, defaultValue);
         }
 
         foreach (var property in typeof(TViewModel).GetProperties().Where(x => x.IsDefined(typeof(NavigationPropertyAttribute), true))) {
-            SetPropertyValue(property, query);
+            var defaultValue = property.GetCustomAttribute<NavigationPropertyAttribute>()?.DefaultValue;
+            SetPropertyValue(property, query, defaultValue);
         }
     }
 
-    private void SetPropertyValue(PropertyInfo property, IDictionary<string, object> query)
+    private void SetPropertyValue(PropertyInfo property, IDictionary<string, object> query, object? defaultValue)
     {
         if (query.TryGetValue(property.Name, out var value)) {
             property.SetMethod?.Invoke(ViewModel, new[] { value });
         } else {
-            var defaultValue = property.GetCustomAttribute<NavigationPropertyAttribute>()?.DefaultValue;
-
             if (defaultValue is not null)
                 property.SetMethod?.Invoke(ViewModel, new[] { defaultValue });
         }
