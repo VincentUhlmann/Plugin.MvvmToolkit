@@ -9,7 +9,7 @@ public sealed class NavigationService : INavigationService
     private readonly ConcurrentDictionary<Type, string> _viewRoutes = new();
 
     /// <inheritdoc />
-    public void AddRoute<TView, TViewModel>(string? route = null) where TView : IView<TViewModel> where TViewModel : BaseViewModel<ILogger<TViewModel>>
+    public void AddRoute<TView, TViewModel>(string? route = null) where TView : IView<TView, TViewModel> where TViewModel : BaseViewModel<ILogger<TViewModel>>
     {
         var viewModel = typeof(TViewModel);
 

@@ -13,7 +13,7 @@ public interface INavigationService
     /// <param name="route">The route to associate with the ViewModel, or null to use the default route.</param>
     /// <exception cref="ArgumentException"></exception>
     /// <exception cref="DuplicateRouteException"></exception>
-    void AddRoute<TView, TViewModel>(string? route = null) where TView : IView<TViewModel> where TViewModel : BaseViewModel<ILogger<TViewModel>>;
+    void AddRoute<TView, TViewModel>(string? route = null) where TView : IView<TView, TViewModel> where TViewModel : BaseViewModel<ILogger<TViewModel>>;
 
     /// <summary>
     /// Navigates to the View associated with the specified ViewModel.

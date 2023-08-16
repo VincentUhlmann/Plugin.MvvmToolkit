@@ -3,9 +3,15 @@
 /// <summary>
 /// Base content page to be used as a starting point for pages in the application.
 /// </summary>
+/// <typeparam name="TView">The type of the associated ViewModel.</typeparam>
 /// <typeparam name="TViewModel">The type of the associated ViewModel.</typeparam>
-public abstract class BaseTabbedPage<TViewModel> : Microsoft.Maui.Controls.TabbedPage, IView<TViewModel>, IDisposable, IQueryAttributable where TViewModel : BaseViewModel<ILogger<TViewModel>>
+public abstract class BaseTabbedPage<TView, TViewModel> : Microsoft.Maui.Controls.TabbedPage, IView<TView, TViewModel>, IDisposable, IQueryAttributable where TView : BaseContentPage<TView, TViewModel> where TViewModel : BaseViewModel<ILogger<TViewModel>>
 {
+    /// <summary>
+    /// The logger instance.
+    /// </summary>
+    protected ILogger<TView> Logger { get; }
+
     /// <summary>
     /// The ViewModel associated with this page.
     /// </summary>
@@ -19,10 +25,13 @@ public abstract class BaseTabbedPage<TViewModel> : Microsoft.Maui.Controls.Tabbe
     /// <summary>
     /// Initializes a new instance of the <see cref="BaseTabbedPage{TViewModel}"/> class.
     /// </summary>
+    /// <param name="logger">The logger instance.</param>
     /// <param name="viewModel">The ViewModel instance.</param>
     /// <param name="setUseSafeArea">Indicates whether the page should use the safe area on iOS devices.</param>
-    protected BaseTabbedPage(TViewModel viewModel, bool setUseSafeArea = true)
+    protected BaseTabbedPage(ILogger<TView> logger, TViewModel viewModel, bool setUseSafeArea = true)
     {
+        Logger = logger;
+
         BindingContext = ViewModel = viewModel;
 
         On<iOS>().SetUseSafeArea(setUseSafeArea);

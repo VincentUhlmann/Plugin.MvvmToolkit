@@ -5,9 +5,9 @@
 		<LangVersion>latest</LangVersion>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<NeutralLanguage>en</NeutralLanguage>
-		<Version>1.9.0</Version>
-		<AssemblyVersion>1.9.0</AssemblyVersion>
-		<AssemblyFileVersion>1.9.0</AssemblyFileVersion>
+		<Version>1.10.0</Version>
+		<AssemblyVersion>1.10.0</AssemblyVersion>
+		<AssemblyFileVersion>1.10.0</AssemblyFileVersion>
 		<PackageId>Plugin.MvvmToolkit.Maui</PackageId>
 		<AssemblyName>Plugin.MvvmToolkit.Maui</AssemblyName>
 		<RootNamespace>Plugin.MvvmToolkit.Maui</RootNamespace>
