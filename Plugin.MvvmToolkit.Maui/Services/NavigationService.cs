@@ -22,7 +22,7 @@ public sealed class NavigationService : INavigationService
     }
 
     /// <inheritdoc />
-    public async Task NavigateAsync<TViewModel>(Dictionary<string, object>? navigationParams = null) where TViewModel : BaseViewModel<ILogger<TViewModel>>
+    public async Task NavigateAsync<TViewModel>(Dictionary<string, object?>? navigationParams = null) where TViewModel : BaseViewModel<ILogger<TViewModel>>
     {
         var viewModel = typeof(TViewModel);
 
@@ -33,9 +33,9 @@ public sealed class NavigationService : INavigationService
     }
 
     /// <inheritdoc />
-    public async Task<TResult> NavigateWithResultAsync<TViewModel, TResult>(Dictionary<string, object>? navigationParams = null) where TViewModel : BaseResultViewModel<ILogger<TViewModel>, TResult>
+    public async Task<TResult> NavigateWithResultAsync<TViewModel, TResult>(Dictionary<string, object?>? navigationParams = null) where TViewModel : BaseResultViewModel<ILogger<TViewModel>, TResult>
     {
-        navigationParams ??= new Dictionary<string, object>();
+        navigationParams ??= new Dictionary<string, object?>();
 
         var guid = Guid.NewGuid();
 
@@ -49,7 +49,7 @@ public sealed class NavigationService : INavigationService
     }
 
     /// <inheritdoc />
-    public async Task NavigateBackAsync(Dictionary<string, object>? navigationParams = null)
+    public async Task NavigateBackAsync(Dictionary<string, object?>? navigationParams = null)
     {
         await Navigate("..", navigationParams);
     }
@@ -62,7 +62,7 @@ public sealed class NavigationService : INavigationService
     /// <returns></returns>
     /// <exception cref="ArgumentException"></exception>
     /// <exception cref="NavigationException"></exception>
-    private static async Task Navigate(string route, Dictionary<string, object>? navigationParams = null)
+    private static async Task Navigate(string route, Dictionary<string, object?>? navigationParams = null)
     {
         try {
             if (navigationParams is null) {

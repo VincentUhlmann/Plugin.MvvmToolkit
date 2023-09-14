@@ -22,7 +22,7 @@ public interface INavigationService
     /// <param name="navigationParams"> A dictionary of parameters to pass to the ViewModel.</param>
     /// <returns>A Task that represents the asynchronous navigation operation.</returns>
     /// <exception cref="RouteNotFoundException"></exception>
-    Task NavigateAsync<TViewModel>(Dictionary<string, object>? navigationParams = null) where TViewModel : BaseViewModel<ILogger<TViewModel>>;
+    Task NavigateAsync<TViewModel>(Dictionary<string, object?>? navigationParams = null) where TViewModel : BaseViewModel<ILogger<TViewModel>>;
 
     /// <summary>
     /// Navigates to the View associated with the specified ViewModel.
@@ -32,12 +32,12 @@ public interface INavigationService
     /// <param name="navigationParams"> A dictionary of parameters to pass to the ViewModel.</param>
     /// <returns>A Task that represents the asynchronous navigation operation.</returns>
     /// <exception cref="RouteNotFoundException"></exception>
-    Task<TResult> NavigateWithResultAsync<TViewModel, TResult>(Dictionary<string, object>? navigationParams = null) where TViewModel : BaseResultViewModel<ILogger<TViewModel>, TResult>;
+    Task<TResult> NavigateWithResultAsync<TViewModel, TResult>(Dictionary<string, object?>? navigationParams = null) where TViewModel : BaseResultViewModel<ILogger<TViewModel>, TResult>;
 
     /// <summary>
     /// Navigates back to the previous View in the navigation stack.
     /// </summary>
     /// <param name="navigationParams"> A dictionary of parameters to pass to the ViewModel.</param>
     /// <returns>A Task that represents the asynchronous navigation operation.</returns>
-    Task NavigateBackAsync(Dictionary<string, object>? navigationParams = null);
+    Task NavigateBackAsync(Dictionary<string, object?>? navigationParams = null);
 }
