@@ -1,4 +1,6 @@
-﻿namespace Plugin.MvvmToolkit.Maui.Views;
+﻿using Microsoft.Maui.Controls.PlatformConfiguration.iOSSpecific;
+
+namespace Plugin.MvvmToolkit.Maui.Views;
 
 /// <summary>
 /// Base content page to be used as a starting point for pages in the application.

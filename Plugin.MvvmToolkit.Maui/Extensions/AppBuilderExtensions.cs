@@ -14,6 +14,7 @@ public static class AppBuilderExtensions
     {
         builder.Services.AddSingleton<IConnectivityService, ConnectivityService>();
         builder.Services.AddSingleton<INavigationService, NavigationService>();
+        builder.Services.AddSingleton<IPopupService, PopupService>();
         return builder;
     }
 }

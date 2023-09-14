@@ -1,7 +1,6 @@
 ﻿global using CommunityToolkit.Mvvm.Messaging;
 global using Microsoft.Extensions.Logging;
 global using Microsoft.Maui.Controls.PlatformConfiguration;
-global using Microsoft.Maui.Controls.PlatformConfiguration.iOSSpecific;
 global using Plugin.MvvmToolkit.Abstractions;
 global using Plugin.MvvmToolkit.Attributes;
 global using Plugin.MvvmToolkit.Collections;
