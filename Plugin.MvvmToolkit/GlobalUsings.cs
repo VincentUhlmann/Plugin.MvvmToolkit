@@ -13,3 +13,5 @@ global using Plugin.MvvmToolkit.ViewModels;
 global using System.Collections.ObjectModel;
 global using System.Collections.Specialized;
 global using System.ComponentModel;
+global using System.Diagnostics.CodeAnalysis;
+global using System.Runtime.CompilerServices;
