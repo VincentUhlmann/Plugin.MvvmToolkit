@@ -37,8 +37,6 @@ public abstract class BaseTabbedPage<TView, TViewModel> : Microsoft.Maui.Control
         BindingContext = ViewModel = viewModel;
 
         On<iOS>().SetUseSafeArea(setUseSafeArea);
-
-        Unloaded += (s, e) => Dispose();
     }
 
     /// <summary>
@@ -94,7 +92,8 @@ public abstract class BaseTabbedPage<TView, TViewModel> : Microsoft.Maui.Control
         if (query is null)
             return;
 
-        foreach (var field in typeof(TViewModel).GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance).Where(x => x.IsDefined(typeof(NavigationPropertyAttribute), true))) {
+        foreach (var field in typeof(TViewModel).GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance).Where(x => x.IsDefined(typeof(NavigationPropertyAttribute), true)))
+        {
             var propertyName = GetGeneratedPropertyName(field.Name);
             var property = typeof(TViewModel).GetProperty(propertyName) ?? throw new NavigationException($"Property '{propertyName}' not found in '{typeof(TViewModel)}'");
 
@@ -102,7 +101,8 @@ public abstract class BaseTabbedPage<TView, TViewModel> : Microsoft.Maui.Control
             SetPropertyValue(property, query, defaultValue);
         }
 
-        foreach (var property in typeof(TViewModel).GetProperties().Where(x => x.IsDefined(typeof(NavigationPropertyAttribute), true))) {
+        foreach (var property in typeof(TViewModel).GetProperties().Where(x => x.IsDefined(typeof(NavigationPropertyAttribute), true)))
+        {
             var defaultValue = property.GetCustomAttribute<NavigationPropertyAttribute>()?.DefaultValue;
             SetPropertyValue(property, query, defaultValue);
         }
@@ -110,9 +110,12 @@ public abstract class BaseTabbedPage<TView, TViewModel> : Microsoft.Maui.Control
 
     private void SetPropertyValue(PropertyInfo property, IDictionary<string, object> query, object? defaultValue)
     {
-        if (query.TryGetValue(property.Name, out var value)) {
+        if (query.TryGetValue(property.Name, out var value))
+        {
             property.SetMethod?.Invoke(ViewModel, new[] { value });
-        } else {
+        }
+        else
+        {
             if (defaultValue is not null)
                 property.SetMethod?.Invoke(ViewModel, new[] { defaultValue });
         }
@@ -120,9 +123,12 @@ public abstract class BaseTabbedPage<TView, TViewModel> : Microsoft.Maui.Control
 
     private static string GetGeneratedPropertyName(string propertyName)
     {
-        if (propertyName.StartsWith("m_")) {
+        if (propertyName.StartsWith("m_"))
+        {
             propertyName = propertyName[2..];
-        } else if (propertyName.StartsWith("_")) {
+        }
+        else if (propertyName.StartsWith("_"))
+        {
             propertyName = propertyName.TrimStart('_');
         }
 
