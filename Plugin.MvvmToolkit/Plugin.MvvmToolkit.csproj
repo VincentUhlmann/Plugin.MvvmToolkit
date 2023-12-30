@@ -1,13 +1,13 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
-		<TargetFramework>net7.0</TargetFramework>
+		<TargetFramework>net8.0</TargetFramework>
 		<Nullable>enable</Nullable>
 		<LangVersion>latest</LangVersion>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<NeutralLanguage>en</NeutralLanguage>
-		<Version>1.15.0</Version>
-		<AssemblyVersion>1.15.0</AssemblyVersion>
-		<AssemblyFileVersion>1.15.0</AssemblyFileVersion>
+		<Version>1.16.0</Version>
+		<AssemblyVersion>1.16.0</AssemblyVersion>
+		<AssemblyFileVersion>1.16.0</AssemblyFileVersion>
 		<PackageId>Plugin.MvvmToolkit</PackageId>
 		<AssemblyName>Plugin.MvvmToolkit</AssemblyName>
 		<RootNamespace>Plugin.MvvmToolkit</RootNamespace>
@@ -37,7 +37,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.0" />
-		<PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="7.0.0" />
+		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="8.0.0" />
 	</ItemGroup>
 </Project>

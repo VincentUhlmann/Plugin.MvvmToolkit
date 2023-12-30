@@ -1,13 +1,13 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
-		<TargetFramework>net7.0</TargetFramework>
+		<TargetFramework>net8.0</TargetFramework>
 		<Nullable>enable</Nullable>
 		<LangVersion>latest</LangVersion>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<NeutralLanguage>en</NeutralLanguage>
-		<Version>1.15.0</Version>
-		<AssemblyVersion>1.15.0</AssemblyVersion>
-		<AssemblyFileVersion>1.15.0</AssemblyFileVersion>
+		<Version>1.16.0</Version>
+		<AssemblyVersion>1.16.0</AssemblyVersion>
+		<AssemblyFileVersion>1.16.0</AssemblyFileVersion>
 		<PackageId>Plugin.MvvmToolkit.Maui</PackageId>
 		<AssemblyName>Plugin.MvvmToolkit.Maui</AssemblyName>
 		<RootNamespace>Plugin.MvvmToolkit.Maui</RootNamespace>
@@ -40,5 +40,9 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\Plugin.MvvmToolkit\Plugin.MvvmToolkit.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
 	</ItemGroup>
 </Project>
