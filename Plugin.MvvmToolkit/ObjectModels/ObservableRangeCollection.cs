@@ -52,6 +52,35 @@ public sealed class ObservableRangeCollection<T> : ObservableCollection<T>
     }
 
     /// <summary>
+    /// Inserts the elements of a collection into the ObservableCollection(Of T) at the specified index.
+    /// </summary>
+    public void InsertRange(int index, IEnumerable<T> collection, NotifyCollectionChangedAction notificationMode = NotifyCollectionChangedAction.Add)
+    {
+        if (notificationMode != NotifyCollectionChangedAction.Add && notificationMode != NotifyCollectionChangedAction.Reset)
+            throw new ArgumentException("Mode must be either Add or Reset for InsertRange.", nameof(notificationMode));
+        if (collection == null)
+            throw new ArgumentNullException(nameof(collection));
+        if (index < 0 || index > Count)
+            throw new ArgumentOutOfRangeException(nameof(index));
+
+        CheckReentrancy();
+
+        var itemsInserted = InsertArrangeCore(index, collection);
+
+        if (!itemsInserted)
+            return;
+
+        if (notificationMode == NotifyCollectionChangedAction.Reset) {
+            RaiseChangeNotificationEvents(action: NotifyCollectionChangedAction.Reset);
+            return;
+        }
+
+        var changedItems = collection is List<T> list ? list : new List<T>(collection);
+
+        RaiseChangeNotificationEvents(action: NotifyCollectionChangedAction.Add, changedItems: changedItems, startingIndex: index);
+    }
+
+    /// <summary>
     /// Removes the first occurence of each item in the specified collection from ObservableCollection(Of T). NOTE: with notificationMode = Remove, removed items starting index is not set because items are not guaranteed to be consecutive.
     /// </summary>
     public void RemoveRange(IEnumerable<T> collection, NotifyCollectionChangedAction notificationMode = NotifyCollectionChangedAction.Reset)
@@ -129,6 +158,22 @@ public sealed class ObservableRangeCollection<T> : ObservableCollection<T>
         var itemAdded = false;
         foreach (var item in collection) {
             Items.Add(item);
+            itemAdded = true;
+        }
+        return itemAdded;
+    }
+
+    /// <summary>
+    /// Inserts the items from the specified collection into the ObservableCollection(Of T) at the specified index and returns whether any item was added.
+    /// </summary>
+    /// <param name="index">The index at which to insert the items.</param>
+    /// <param name="collection">The collection of items to insert.</param>
+    /// <returns>True if any item was added; otherwise, false.</returns>
+    private bool InsertArrangeCore(int index, IEnumerable<T> collection)
+    {
+        var itemAdded = false;
+        foreach (var item in collection) {
+            Items.Insert(index++, item);
             itemAdded = true;
         }
         return itemAdded;
