@@ -35,7 +35,7 @@ public sealed class NavigationService : INavigationService
     /// <inheritdoc />
     public async Task<TResult> NavigateWithResultAsync<TViewModel, TResult>(Dictionary<string, object?>? navigationParams = null) where TViewModel : BaseResultViewModel<ILogger<TViewModel>, TResult>
     {
-        navigationParams ??= new Dictionary<string, object?>();
+        navigationParams ??= [];
 
         var guid = Guid.NewGuid();
 

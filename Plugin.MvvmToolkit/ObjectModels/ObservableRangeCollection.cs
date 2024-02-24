@@ -29,8 +29,8 @@ public sealed class ObservableRangeCollection<T> : ObservableCollection<T>
     {
         if (notificationMode != NotifyCollectionChangedAction.Add && notificationMode != NotifyCollectionChangedAction.Reset)
             throw new ArgumentException("Mode must be either Add or Reset for AddRange.", nameof(notificationMode));
-        if (collection == null)
-            throw new ArgumentNullException(nameof(collection));
+
+        ArgumentNullException.ThrowIfNull(collection);
 
         CheckReentrancy();
 
@@ -58,8 +58,9 @@ public sealed class ObservableRangeCollection<T> : ObservableCollection<T>
     {
         if (notificationMode != NotifyCollectionChangedAction.Add && notificationMode != NotifyCollectionChangedAction.Reset)
             throw new ArgumentException("Mode must be either Add or Reset for InsertRange.", nameof(notificationMode));
-        if (collection == null)
-            throw new ArgumentNullException(nameof(collection));
+
+        ArgumentNullException.ThrowIfNull(collection);
+
         if (index < 0 || index > Count)
             throw new ArgumentOutOfRangeException(nameof(index));
 
@@ -87,8 +88,8 @@ public sealed class ObservableRangeCollection<T> : ObservableCollection<T>
     {
         if (notificationMode != NotifyCollectionChangedAction.Remove && notificationMode != NotifyCollectionChangedAction.Reset)
             throw new ArgumentException("Mode must be either Remove or Reset for RemoveRange.", nameof(notificationMode));
-        if (collection == null)
-            throw new ArgumentNullException(nameof(collection));
+
+        ArgumentNullException.ThrowIfNull(collection);
 
         CheckReentrancy();
 
@@ -122,15 +123,14 @@ public sealed class ObservableRangeCollection<T> : ObservableCollection<T>
     /// <summary>
     /// Clears the current collection and replaces it with the specified item.
     /// </summary>
-    public void Replace(T item) => ReplaceRange(new T[] { item });
+    public void Replace(T item) => ReplaceRange([item]);
 
     /// <summary>
     /// Clears the current collection and replaces it with the specified collection.
     /// </summary>
     public void ReplaceRange(IEnumerable<T> collection)
     {
-        if (collection == null)
-            throw new ArgumentNullException(nameof(collection));
+        ArgumentNullException.ThrowIfNull(collection);
 
         CheckReentrancy();
 

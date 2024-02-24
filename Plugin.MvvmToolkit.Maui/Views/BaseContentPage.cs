@@ -92,8 +92,7 @@ public abstract class BaseContentPage<TView, TViewModel> : ContentPage, IView<TV
         if (query is null)
             return;
 
-        foreach (var field in typeof(TViewModel).GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance).Where(x => x.IsDefined(typeof(NavigationPropertyAttribute), true)))
-        {
+        foreach (var field in typeof(TViewModel).GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance).Where(x => x.IsDefined(typeof(NavigationPropertyAttribute), true))) {
             var propertyName = GetGeneratedPropertyName(field.Name);
             var property = typeof(TViewModel).GetProperty(propertyName) ?? throw new NavigationException($"Property '{propertyName}' not found in '{typeof(TViewModel)}'");
 
@@ -101,8 +100,7 @@ public abstract class BaseContentPage<TView, TViewModel> : ContentPage, IView<TV
             SetPropertyValue(property, query, defaultValue);
         }
 
-        foreach (var property in typeof(TViewModel).GetProperties().Where(x => x.IsDefined(typeof(NavigationPropertyAttribute), true)))
-        {
+        foreach (var property in typeof(TViewModel).GetProperties().Where(x => x.IsDefined(typeof(NavigationPropertyAttribute), true))) {
             var defaultValue = property.GetCustomAttribute<NavigationPropertyAttribute>()?.DefaultValue;
             SetPropertyValue(property, query, defaultValue);
         }
@@ -110,25 +108,19 @@ public abstract class BaseContentPage<TView, TViewModel> : ContentPage, IView<TV
 
     private void SetPropertyValue(PropertyInfo property, IDictionary<string, object> query, object? defaultValue)
     {
-        if (query.TryGetValue(property.Name, out var value))
-        {
-            property.SetMethod?.Invoke(ViewModel, new[] { value });
-        }
-        else
-        {
+        if (query.TryGetValue(property.Name, out var value)) {
+            property.SetMethod?.Invoke(ViewModel, [value]);
+        } else {
             if (defaultValue is not null)
-                property.SetMethod?.Invoke(ViewModel, new[] { defaultValue });
+                property.SetMethod?.Invoke(ViewModel, [defaultValue]);
         }
     }
 
     private static string GetGeneratedPropertyName(string propertyName)
     {
-        if (propertyName.StartsWith("m_"))
-        {
+        if (propertyName.StartsWith("m_")) {
             propertyName = propertyName[2..];
-        }
-        else if (propertyName.StartsWith("_"))
-        {
+        } else if (propertyName.StartsWith('_')) {
             propertyName = propertyName.TrimStart('_');
         }
 
