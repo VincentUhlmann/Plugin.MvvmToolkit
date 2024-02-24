@@ -5,9 +5,9 @@
 		<LangVersion>latest</LangVersion>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<NeutralLanguage>en</NeutralLanguage>
-		<Version>1.16.0</Version>
-		<AssemblyVersion>1.16.0</AssemblyVersion>
-		<AssemblyFileVersion>1.16.0</AssemblyFileVersion>
+		<Version>1.17.0</Version>
+		<AssemblyVersion>1.17.0</AssemblyVersion>
+		<AssemblyFileVersion>1.17.0</AssemblyFileVersion>
 		<PackageId>Plugin.MvvmToolkit.Maui</PackageId>
 		<AssemblyName>Plugin.MvvmToolkit.Maui</AssemblyName>
 		<RootNamespace>Plugin.MvvmToolkit.Maui</RootNamespace>
@@ -43,6 +43,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
+		<PackageReference Include="Microsoft.Maui.Controls" Version="8.0.7" />
+		<PackageReference Update="Microsoft.Maui.Controls.Compatibility" Version="8.0.7" />
 	</ItemGroup>
 </Project>
