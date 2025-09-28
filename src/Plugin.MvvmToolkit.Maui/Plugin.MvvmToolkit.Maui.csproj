@@ -1,0 +1,28 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <PackageId>Plugin.MvvmToolkit.Maui</PackageId>
+        <AssemblyName>Plugin.MvvmToolkit.Maui</AssemblyName>
+        <RootNamespace>Plugin.MvvmToolkit.Maui</RootNamespace>
+        <Title>.NET MAUI implementation of the Plugin.MvvmToolkit library for building applications using the MVVM pattern.</Title>
+        <Summary>.NET MAUI implementation of the Plugin.MvvmToolkit library for building applications using the MVVM pattern.</Summary>
+        <Description>.NET MAUI implementation of the Plugin.MvvmToolkit library for building applications using the MVVM pattern.</Description>
+        <PackageTags>plugin, .net, mvvm, maui</PackageTags>
+        <UseMaui>true</UseMaui>
+        <SingleProject>true</SingleProject>
+        <SkipValidateMauiImplicitPackageReferences>true</SkipValidateMauiImplicitPackageReferences>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <None Include="README.md" Pack="true" PackagePath="" />
+        <None Include="..\..\LICENSE.md" Pack="true" PackagePath="" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Microsoft.Maui.Controls" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\Plugin.MvvmToolkit\Plugin.MvvmToolkit.csproj" />
+    </ItemGroup>
+
+</Project>

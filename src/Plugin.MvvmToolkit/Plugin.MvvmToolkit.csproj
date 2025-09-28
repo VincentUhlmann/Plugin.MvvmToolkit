@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<PackageId>Plugin.MvvmToolkit</PackageId>
+		<AssemblyName>Plugin.MvvmToolkit</AssemblyName>
+		<RootNamespace>Plugin.MvvmToolkit</RootNamespace>
+		<Title>.NET library for building modern applications using the MVVM pattern.</Title>
+		<Summary>.NET library for building modern applications using the MVVM pattern.</Summary>
+		<Description>.NET library for building modern applications using the MVVM pattern.</Description>
+		<PackageTags>plugin, .net, mvvm</PackageTags>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<None Include="README.md" Pack="true" PackagePath="" />
+		<None Include="..\..\LICENSE.md" Pack="true" PackagePath="" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="CommunityToolkit.Mvvm" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Abstractions" />
+	</ItemGroup>
+</Project>
