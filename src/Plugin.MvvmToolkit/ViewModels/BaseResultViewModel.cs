@@ -1,4 +1,4 @@
-﻿namespace Plugin.MvvmToolkit.ViewModels;
+namespace Plugin.MvvmToolkit.ViewModels;
 
 /// <summary>
 /// A ViewModel that can receive a result from a navigation.
@@ -22,7 +22,7 @@ public abstract class BaseResultViewModel<TLogger, TResult> : BaseViewModel<TLog
     /// Initializes a new instance of the BaseResultViewModel class with the specified logger instance.
     /// </summary>
     /// <param name="logger"></param>
-    public BaseResultViewModel(TLogger logger) : base(logger)
+    protected BaseResultViewModel(TLogger logger) : base(logger)
     {
     }
 
@@ -50,7 +50,7 @@ public abstract class BaseResultViewModel<TLogger, TResult> : BaseViewModel<TLog
     /// Receives the result of a navigation.
     /// </summary>
     /// <param name="message"></param>
-    void IRecipient<NavigationResultMessage<TResult>>.Receive(NavigationResultMessage<TResult> message)
+    public void Receive(NavigationResultMessage<TResult> message)
     {
         _tcs = new TaskCompletionSource<TResult>();
         message.Reply(_tcs.Task);
@@ -60,6 +60,8 @@ public abstract class BaseResultViewModel<TLogger, TResult> : BaseViewModel<TLog
     /// Sets the result of the navigation.
     /// </summary>
     /// <param name="result"></param>
-    protected void SetResult(TResult result) =>
+    protected void SetResult(TResult result)
+    {
         _tcs?.SetResult(result);
+    }
 }

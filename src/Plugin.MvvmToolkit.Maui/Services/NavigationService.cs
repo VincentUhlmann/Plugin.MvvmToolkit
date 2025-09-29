@@ -1,4 +1,4 @@
-﻿namespace Plugin.MvvmToolkit.Maui.Services;
+namespace Plugin.MvvmToolkit.Maui.Services;
 
 /// <inheritdoc />
 public sealed class NavigationService : INavigationService
@@ -15,8 +15,9 @@ public sealed class NavigationService : INavigationService
 
         route ??= typeof(TView).Name;
 
-        if (!_viewRoutes.TryAdd(viewModel, route))
+        if (!_viewRoutes.TryAdd(viewModel, route)) {
             throw new DuplicateRouteException($"View model {viewModel.Name} is already mapped to a view route.");
+        }
 
         Routing.RegisterRoute(route, typeof(TView));
     }
@@ -26,8 +27,9 @@ public sealed class NavigationService : INavigationService
     {
         var viewModel = typeof(TViewModel);
 
-        if (!_viewRoutes.TryGetValue(viewModel, out var viewRoute))
+        if (!_viewRoutes.TryGetValue(viewModel, out string? viewRoute)) {
             throw new RouteNotFoundException($"View model '{viewModel.Name}' is not mapped to a view route.");
+        }
 
         await Navigate(viewRoute, navigationParams);
     }

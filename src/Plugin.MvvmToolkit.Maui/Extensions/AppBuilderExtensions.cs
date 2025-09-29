@@ -1,4 +1,4 @@
-﻿namespace Plugin.MvvmToolkit.Maui.Extensions;
+namespace Plugin.MvvmToolkit.Maui.Extensions;
 
 /// <summary>
 /// Provides extension methods for configuring a Maui application with the MvvmToolkit library.
@@ -12,9 +12,9 @@ public static class AppBuilderExtensions
     /// <returns>The updated <see cref="MauiAppBuilder"/> instance.</returns>
     public static MauiAppBuilder UseMvvmToolkit(this MauiAppBuilder builder)
     {
-        builder.Services.AddSingleton<IConnectivityService, ConnectivityService>();
-        builder.Services.AddSingleton<INavigationService, NavigationService>();
-        builder.Services.AddSingleton<IPopupService, PopupService>();
+        _ = builder.Services.AddSingleton<IConnectivityService, ConnectivityService>();
+        _ = builder.Services.AddSingleton<INavigationService, NavigationService>();
+        _ = builder.Services.AddSingleton<IPopupService, PopupService>();
         return builder;
     }
 }

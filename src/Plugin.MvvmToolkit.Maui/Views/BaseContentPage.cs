@@ -1,4 +1,4 @@
-﻿using Microsoft.Maui.Controls.PlatformConfiguration.iOSSpecific;
+using Microsoft.Maui.Controls.PlatformConfiguration.iOSSpecific;
 
 namespace Plugin.MvvmToolkit.Maui.Views;
 
@@ -36,7 +36,7 @@ public abstract class BaseContentPage<TView, TViewModel> : ContentPage, IView<TV
 
         BindingContext = ViewModel = viewModel;
 
-        On<iOS>().SetUseSafeArea(setUseSafeArea);
+        _ = On<iOS>().SetUseSafeArea(setUseSafeArea);
     }
 
     /// <summary>
@@ -65,11 +65,13 @@ public abstract class BaseContentPage<TView, TViewModel> : ContentPage, IView<TV
     /// <param name="disposing"></param>
     protected virtual void Dispose(bool disposing)
     {
-        if (Disposed)
+        if (Disposed) {
             return;
+        }
 
-        if (disposing)
+        if (disposing) {
             ViewModel.Dispose();
+        }
 
         Disposed = true;
     }
@@ -89,30 +91,32 @@ public abstract class BaseContentPage<TView, TViewModel> : ContentPage, IView<TV
     /// <param name="query"></param>
     public void ApplyQueryAttributes(IDictionary<string, object> query)
     {
-        if (query is null)
+        if (query is null) {
             return;
+        }
 
         foreach (var field in typeof(TViewModel).GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance).Where(x => x.IsDefined(typeof(NavigationPropertyAttribute), true))) {
-            var propertyName = GetGeneratedPropertyName(field.Name);
+            string propertyName = GetGeneratedPropertyName(field.Name);
             var property = typeof(TViewModel).GetProperty(propertyName) ?? throw new NavigationException($"Property '{propertyName}' not found in '{typeof(TViewModel)}'");
 
-            var defaultValue = field.GetCustomAttribute<NavigationPropertyAttribute>()?.DefaultValue;
+            object? defaultValue = field.GetCustomAttribute<NavigationPropertyAttribute>()?.DefaultValue;
             SetPropertyValue(property, query, defaultValue);
         }
 
         foreach (var property in typeof(TViewModel).GetProperties().Where(x => x.IsDefined(typeof(NavigationPropertyAttribute), true))) {
-            var defaultValue = property.GetCustomAttribute<NavigationPropertyAttribute>()?.DefaultValue;
+            object? defaultValue = property.GetCustomAttribute<NavigationPropertyAttribute>()?.DefaultValue;
             SetPropertyValue(property, query, defaultValue);
         }
     }
 
     private void SetPropertyValue(PropertyInfo property, IDictionary<string, object> query, object? defaultValue)
     {
-        if (query.TryGetValue(property.Name, out var value)) {
-            property.SetMethod?.Invoke(ViewModel, [value]);
+        if (query.TryGetValue(property.Name, out object? value)) {
+            _ = (property.SetMethod?.Invoke(ViewModel, [value]));
         } else {
-            if (defaultValue is not null)
-                property.SetMethod?.Invoke(ViewModel, [defaultValue]);
+            if (defaultValue is not null) {
+                _ = (property.SetMethod?.Invoke(ViewModel, [defaultValue]));
+            }
         }
     }
 

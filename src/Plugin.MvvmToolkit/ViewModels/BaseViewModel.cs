@@ -1,4 +1,4 @@
-﻿namespace Plugin.MvvmToolkit.ViewModels;
+namespace Plugin.MvvmToolkit.ViewModels;
 
 /// <summary>
 /// Represents a base class for view models that provides basic functionality for handling lifecycle events and logging.
@@ -65,8 +65,9 @@ public abstract partial class BaseViewModel<TLogger> : ObservableObject, IDispos
     /// <param name="disposing"></param>
     protected virtual void Dispose(bool disposing)
     {
-        if (Disposed)
+        if (Disposed) {
             return;
+        }
 
         Disposed = true;
     }

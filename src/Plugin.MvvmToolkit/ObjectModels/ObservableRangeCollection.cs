@@ -1,4 +1,4 @@
-﻿namespace Plugin.MvvmToolkit.ObjectModels;
+namespace Plugin.MvvmToolkit.ObjectModels;
 
 /// <summary>
 /// Represents a dynamic data collection that provides notifications when items get added, removed, or when the whole list is refreshed.
@@ -27,26 +27,28 @@ public sealed class ObservableRangeCollection<T> : ObservableCollection<T>
     /// </summary>
     public void AddRange(IEnumerable<T> collection, NotifyCollectionChangedAction notificationMode = NotifyCollectionChangedAction.Add)
     {
-        if (notificationMode != NotifyCollectionChangedAction.Add && notificationMode != NotifyCollectionChangedAction.Reset)
+        if (notificationMode is not NotifyCollectionChangedAction.Add and not NotifyCollectionChangedAction.Reset) {
             throw new ArgumentException("Mode must be either Add or Reset for AddRange.", nameof(notificationMode));
+        }
 
         ArgumentNullException.ThrowIfNull(collection);
 
         CheckReentrancy();
 
-        var startIndex = Count;
+        int startIndex = Count;
 
-        var itemsAdded = AddArrangeCore(collection);
+        bool itemsAdded = AddArrangeCore(collection);
 
-        if (!itemsAdded)
+        if (!itemsAdded) {
             return;
+        }
 
         if (notificationMode == NotifyCollectionChangedAction.Reset) {
             RaiseChangeNotificationEvents(action: NotifyCollectionChangedAction.Reset);
             return;
         }
 
-        var changedItems = collection is List<T> list ? list : new List<T>(collection);
+        var changedItems = collection is List<T> list ? list : [.. collection];
 
         RaiseChangeNotificationEvents(action: NotifyCollectionChangedAction.Add, changedItems: changedItems, startingIndex: startIndex);
     }
@@ -56,27 +58,30 @@ public sealed class ObservableRangeCollection<T> : ObservableCollection<T>
     /// </summary>
     public void InsertRange(int index, IEnumerable<T> collection, NotifyCollectionChangedAction notificationMode = NotifyCollectionChangedAction.Add)
     {
-        if (notificationMode != NotifyCollectionChangedAction.Add && notificationMode != NotifyCollectionChangedAction.Reset)
+        if (notificationMode is not NotifyCollectionChangedAction.Add and not NotifyCollectionChangedAction.Reset) {
             throw new ArgumentException("Mode must be either Add or Reset for InsertRange.", nameof(notificationMode));
+        }
 
         ArgumentNullException.ThrowIfNull(collection);
 
-        if (index < 0 || index > Count)
+        if (index < 0 || index > Count) {
             throw new ArgumentOutOfRangeException(nameof(index));
+        }
 
         CheckReentrancy();
 
-        var itemsInserted = InsertArrangeCore(index, collection);
+        bool itemsInserted = InsertArrangeCore(index, collection);
 
-        if (!itemsInserted)
+        if (!itemsInserted) {
             return;
+        }
 
         if (notificationMode == NotifyCollectionChangedAction.Reset) {
             RaiseChangeNotificationEvents(action: NotifyCollectionChangedAction.Reset);
             return;
         }
 
-        var changedItems = collection is List<T> list ? list : new List<T>(collection);
+        var changedItems = collection is List<T> list ? list : [.. collection];
 
         RaiseChangeNotificationEvents(action: NotifyCollectionChangedAction.Add, changedItems: changedItems, startingIndex: index);
     }
@@ -86,36 +91,39 @@ public sealed class ObservableRangeCollection<T> : ObservableCollection<T>
     /// </summary>
     public void RemoveRange(IEnumerable<T> collection, NotifyCollectionChangedAction notificationMode = NotifyCollectionChangedAction.Reset)
     {
-        if (notificationMode != NotifyCollectionChangedAction.Remove && notificationMode != NotifyCollectionChangedAction.Reset)
+        if (notificationMode is not NotifyCollectionChangedAction.Remove and not NotifyCollectionChangedAction.Reset) {
             throw new ArgumentException("Mode must be either Remove or Reset for RemoveRange.", nameof(notificationMode));
+        }
 
         ArgumentNullException.ThrowIfNull(collection);
 
         CheckReentrancy();
 
         if (notificationMode == NotifyCollectionChangedAction.Reset) {
-            var raiseEvents = false;
+            bool raiseEvents = false;
             foreach (var item in collection) {
-                Items.Remove(item);
+                _ = Items.Remove(item);
                 raiseEvents = true;
             }
 
-            if (raiseEvents)
+            if (raiseEvents) {
                 RaiseChangeNotificationEvents(action: NotifyCollectionChangedAction.Reset);
+            }
 
             return;
         }
 
         var changedItems = new List<T>(collection);
-        for (var i = 0; i < changedItems.Count; i++) {
+        for (int i = 0; i < changedItems.Count; i++) {
             if (!Items.Remove(changedItems[i])) {
                 changedItems.RemoveAt(i); // Can't use a foreach because changedItems is intended to be (carefully) modified
                 i--;
             }
         }
 
-        if (changedItems.Count == 0)
+        if (changedItems.Count == 0) {
             return;
+        }
 
         RaiseChangeNotificationEvents(action: NotifyCollectionChangedAction.Remove, changedItems: changedItems);
     }
@@ -123,7 +131,10 @@ public sealed class ObservableRangeCollection<T> : ObservableCollection<T>
     /// <summary>
     /// Clears the current collection and replaces it with the specified item.
     /// </summary>
-    public void Replace(T item) => ReplaceRange([item]);
+    public void Replace(T item)
+    {
+        ReplaceRange([item]);
+    }
 
     /// <summary>
     /// Clears the current collection and replaces it with the specified collection.
@@ -134,16 +145,17 @@ public sealed class ObservableRangeCollection<T> : ObservableCollection<T>
 
         CheckReentrancy();
 
-        var previouslyEmpty = Items.Count == 0;
+        bool previouslyEmpty = Items.Count == 0;
 
         Items.Clear();
 
-        AddArrangeCore(collection);
+        _ = AddArrangeCore(collection);
 
-        var currentlyEmpty = Items.Count == 0;
+        bool currentlyEmpty = Items.Count == 0;
 
-        if (previouslyEmpty && currentlyEmpty)
+        if (previouslyEmpty && currentlyEmpty) {
             return;
+        }
 
         RaiseChangeNotificationEvents(action: NotifyCollectionChangedAction.Reset);
     }
@@ -155,11 +167,12 @@ public sealed class ObservableRangeCollection<T> : ObservableCollection<T>
     /// <returns>True if any item was added; otherwise, false.</returns>
     private bool AddArrangeCore(IEnumerable<T> collection)
     {
-        var itemAdded = false;
+        bool itemAdded = false;
         foreach (var item in collection) {
             Items.Add(item);
             itemAdded = true;
         }
+
         return itemAdded;
     }
 
@@ -171,11 +184,12 @@ public sealed class ObservableRangeCollection<T> : ObservableCollection<T>
     /// <returns>True if any item was added; otherwise, false.</returns>
     private bool InsertArrangeCore(int index, IEnumerable<T> collection)
     {
-        var itemAdded = false;
+        bool itemAdded = false;
         foreach (var item in collection) {
             Items.Insert(index++, item);
             itemAdded = true;
         }
+
         return itemAdded;
     }
 
@@ -190,9 +204,10 @@ public sealed class ObservableRangeCollection<T> : ObservableCollection<T>
         OnPropertyChanged(new PropertyChangedEventArgs(nameof(Count)));
         OnPropertyChanged(new PropertyChangedEventArgs("Item[]"));
 
-        if (changedItems == null)
+        if (changedItems == null) {
             OnCollectionChanged(new NotifyCollectionChangedEventArgs(action));
-        else
+        } else {
             OnCollectionChanged(new NotifyCollectionChangedEventArgs(action, changedItems: changedItems, startingIndex: startingIndex));
+        }
     }
 }

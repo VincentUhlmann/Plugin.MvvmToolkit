@@ -1,10 +1,14 @@
-﻿namespace Plugin.MvvmToolkit.Exceptions;
+namespace Plugin.MvvmToolkit.Exceptions;
 
 /// <summary>
 /// Represents an exception that is thrown when an error occurs during navigation in a navigation service.
 /// </summary>
 public sealed class NavigationException : Exception
 {
+    public NavigationException()
+    {
+    }
+
     /// <summary>
     /// Initializes a new instance of the NavigationException class with a specified error message.
     /// </summary>
