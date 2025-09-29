@@ -1,4 +1,5 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
+
     <PropertyGroup>
         <PackageId>Plugin.MvvmToolkit.Maui</PackageId>
         <AssemblyName>Plugin.MvvmToolkit.Maui</AssemblyName>

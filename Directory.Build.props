@@ -1,4 +1,5 @@
 <Project>
+
     <PropertyGroup>
         <TargetFramework>net9.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
@@ -28,10 +29,12 @@
         <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
         <StopOnFirstFailure>true</StopOnFirstFailure>
     </PropertyGroup>
-    <!--<ItemGroup>
+
+    <ItemGroup>
         <PackageReference Include="SonarAnalyzer.CSharp">
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
-    </ItemGroup>-->
+    </ItemGroup>
+
 </Project>
